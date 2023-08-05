@@ -23,7 +23,7 @@ const DesksList = () => {
 
   useEffect(() => {
     dispatch(fetchDesks());
-  }, [dispatch, desks]);
+  }, [dispatch]);
 
   // const { isMobile } = useMatchMedia();
   // const hasScroll = !isMobile && visibleDesks.length > 2;

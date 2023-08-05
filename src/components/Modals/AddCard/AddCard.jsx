@@ -35,11 +35,11 @@ const CardSchema = Yup.object().shape({
 
 export default function AddCard({ onSave, close }) {
   const [selectedValue, setSelectedValue] = useState("without");
-  const [deadlineValue, setDeadlineValue] = useState(null);
+  const [selectDay, setSelectDay] = useState(null);
 
   const handleChange = (event) => setSelectedValue(event.target.value);
 
-  const onChangeDedline = (newValue) => setDeadlineValue(newValue);
+  const handleSelectDay = (value) => setSelectDay(value);
 
   const controlProps = (item) => ({
     checked: selectedValue === item,
@@ -78,7 +78,7 @@ export default function AddCard({ onSave, close }) {
         validationSchema={CardSchema}
         onSubmit={(values, actions) => {
           values.priority = selectedValue;
-          values.deadline = `${dayjs(deadlineValue).format("MM-DD-YYYY")}`;
+          values.deadline = `${dayjs(selectDay).format("MM-DD-YYYY")}`;
           onSave(values);
           actions.resetForm();
           close();
@@ -205,14 +205,20 @@ export default function AddCard({ onSave, close }) {
               fontWeight: "400",
               fontSize: "12px",
               lineHeight: 1.5,
-              color: "--cardTxt",
+              color: "var(--cardTxt)",
               fontFamily: "var(--poppinsFont)",
             }}
           >
             Deadline
           </Typography>
 
-          <Calendar value={deadlineValue} onChange={onChangeDedline} />
+          {/* <Calendar
+            value={deadlineValue}
+            onChange={onChangeDedline}
+            selectDay={selectDay}
+          /> */}
+
+          <Calendar onSelectDay={handleSelectDay} />
 
           <Button type="submit">
             <Div>
