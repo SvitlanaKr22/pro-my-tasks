@@ -2,15 +2,14 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { PickersDay } from "@mui/x-date-pickers";
-
 import sprite from "../../../images/sprite.svg";
 import { Span, Div, Text } from "./Calendar.Styled";
 import Modal from "../Modal";
+import Popover from "@mui/material/Popover";
 
 import dayjs from "dayjs";
 import { useState } from "react";
-//import styled from "styled-components";
-//import { styled } from "@mui/material/styles";
+
 import "./Calendar.css";
 
 export default function Calendar({ onSelectDay }) {
@@ -20,41 +19,7 @@ export default function Calendar({ onSelectDay }) {
     `Today, ${dayjs().format("MMMM D")}`
   );
 
-  // const MyDay = styled(PickersDay)({
-  //   color: "#08da24",
-  //   backgroundColor: "aqua",
-  // });
-
-  const MyDay1 = (props) => {
-    console.log(props);
-
-    // const { selected, disabled, ...otherProps } = props;
-
-    // const bgdColorDay = selected ? "var(--calendarBorder)" : "inherit";
-    // const colorDay = selected
-    //   ? "var(--calendarCurrentDate)"
-    //   : disabled
-    //   ? "var(--opacityWhite)"
-    //   : "var(--calendarCurrentMonth)";
-    // return (
-    //   <PickersDay
-    //     {...otherProps}
-    //     //  disabled={disabled}
-    //     sx={{
-    //       color: colorDay,
-    //       backgroundColor: bgdColorDay,
-    //       fontSize: "14px",
-    //       "&:focus": {
-    //         backgroundColor: "var(--calendarBorder)",
-    //         color: "var(--calendarCurrentDate)",
-    //       },
-    //     }}
-    //   />
-    // );
-    // const { selected, disabled, ...otherProps } = props;
-
-    return <PickersDay {...props} className="DayItem" />;
-  };
+  const CalendarDay = (props) => <PickersDay {...props} className="DayItem" />;
 
   const openModalCalendar = () => {
     setIsShowCalendar(true);
@@ -68,14 +33,102 @@ export default function Calendar({ onSelectDay }) {
     setValue(newValue);
     onSelectDay(newValue);
     setDateDedline(`${dayjs(newValue).format("dddd, MMMM D, YYYY")}`);
-    // closeModalCalendar();
+    closeModalCalendar();
   };
+  //-----------------------------------------------------------------------
+  // return (
+  //   <LocalizationProvider dateAdapter={AdapterDayjs}>
+  //     <Div onClick={openModalCalendar}>
+  //       <Text>{dateDedline}</Text>
+  //       <Span>
+  //         <svg width="18" height="18" stroke="var(--accentColor)">
+  //           <use href={sprite + `#icon-chevron-down`}></use>
+  //         </svg>
+  //       </Span>
+  //     </Div>
+
+  //     {isShowCalendar && (
+  //       <Popover
+  //         open={open}
+  //         anchorEl={anchorEl}
+  //         onClose={closeModalCalendar}
+  //         anchorOrigin={{
+  //           vertical: "bottom",
+  //           horizontal: "left",
+  //         }}
+  //       >
+  //         <DateCalendar
+  //           className="CalendarContainer"
+  //           sx={{
+  //             "& .MuiDayCalendar-weekDayLabel": {
+  //               fontFamily: "var(--poppinsFont)",
+  //               color: "var(--filterModalText)",
+  //               fontSize: "14px",
+  //               width: "21px",
+  //               height: "21px",
+  //               margin: "14px 6px 11px 6px",
+  //             },
+
+  //             "& .MuiPickersCalendarHeader-root": {
+  //               position: "relative",
+  //               maxHeight: "56px",
+  //               height: "56px",
+  //               minHeight: "56px",
+  //               paddingLeft: "0px",
+  //               marginTop: "0px",
+  //               marginBottom: "0px",
+  //             },
+  //             "& .MuiPickersCalendarHeader-root::after": {
+  //               content: '""',
+  //               width: "210px",
+  //               height: "1px",
+  //               backgroundColor: "var(--filterLines)",
+  //               position: "absolute",
+  //               top: "100%",
+  //               left: "10%",
+  //             },
+  //             "& .MuiPickersFadeTransitionGroup-root": {
+  //               position: "static",
+  //             },
+  //             "& .MuiPickersCalendarHeader-label": {
+  //               position: "absolute",
+  //               top: "30%",
+  //               left: "calc(30% );",
+  //             },
+  //             "& .MuiPickersArrowSwitcher-spacer": {
+  //               width: "180px",
+  //             },
+  //             "& .MuiPickersArrowSwitcher-button": {
+  //               color: "var(--calendarCurrentMonth)",
+  //             },
+  //             "& .MuiPickersArrowSwitcher-button.Mui-disabled": {
+  //               color: "var(--opacityWhite)",
+  //             },
+  //           }}
+  //           defaultValue={dayjs()}
+  //           views={["day"]}
+  //           disablePast
+  //           disableHighlightToday
+  //           showDaysOutsideCurrentMonth={true}
+  //           value={value}
+  //           onChange={onChange}
+  //           slots={{
+  //             day: CalendarDay,
+  //           }}
+  //         />
+  //       </Popover>
+  //     )}
+  //   </LocalizationProvider>
+  // );
+
+  //-----------------------------------------------------------------------
+  //-----------------------------------------------------------------------
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <Div>
+      <Div onClick={openModalCalendar}>
         <Text>{dateDedline}</Text>
-        <Span onClick={openModalCalendar}>
+        <Span>
           <svg width="18" height="18" stroke="var(--accentColor)">
             <use href={sprite + `#icon-chevron-down`}></use>
           </svg>
@@ -85,19 +138,63 @@ export default function Calendar({ onSelectDay }) {
       {isShowCalendar && (
         <Modal close={closeModalCalendar}>
           <DateCalendar
+            className="CalendarContainer"
             sx={{
-              backgroundColor: "var(--calendarBackground)",
-              color: "var(--calendarCurrentMonth)",
-              // border: "1px solid var(--calendarBorder)",
-              borderRadius: "8px",
+              "& .MuiDayCalendar-weekDayLabel": {
+                fontFamily: "var(--poppinsFont)",
+                color: "var(--filterModalText)",
+                fontSize: "14px",
+                width: "21px",
+                height: "21px",
+                margin: "14px 6px 11px 6px",
+              },
+
+              "& .MuiPickersCalendarHeader-root": {
+                position: "relative",
+                maxHeight: "56px",
+                height: "56px",
+                minHeight: "56px",
+                paddingLeft: "0px",
+                marginTop: "0px",
+                marginBottom: "0px",
+              },
+              "& .MuiPickersCalendarHeader-root::after": {
+                content: '""',
+                width: "210px",
+                height: "1px",
+                backgroundColor: "var(--filterLines)",
+                position: "absolute",
+                top: "100%",
+                left: "10%",
+              },
+              "& .MuiPickersFadeTransitionGroup-root": {
+                position: "static",
+              },
+              "& .MuiPickersCalendarHeader-label": {
+                position: "absolute",
+                top: "30%",
+                left: "calc(30% );",
+              },
+              "& .MuiPickersArrowSwitcher-spacer": {
+                width: "180px",
+              },
+              "& .MuiPickersArrowSwitcher-button": {
+                color: "var(--calendarCurrentMonth)",
+              },
+              "& .MuiPickersArrowSwitcher-button.Mui-disabled": {
+                color: "var(--opacityWhite)",
+              },
             }}
             defaultValue={dayjs()}
             views={["day"]}
             disablePast
+            disableHighlightToday
+            showDaysOutsideCurrentMonth={true}
             value={value}
             onChange={onChange}
-            slots={{ day: MyDay1 }}
-            //  slotProps={{  }}
+            slots={{
+              day: CalendarDay,
+            }}
           />
         </Modal>
       )}

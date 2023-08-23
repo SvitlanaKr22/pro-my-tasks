@@ -13,6 +13,7 @@ export const Div = styled.div`
   justify-content: start;
   align-items: center;
   gap: 10px;
+  cursor: pointer;
 `;
 
 export const Text = styled.p`
