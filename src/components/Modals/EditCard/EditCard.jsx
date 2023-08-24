@@ -1,16 +1,18 @@
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { Typography } from "@mui/material";
+
 import sprite from "../../../images/sprite.svg";
 
+import { Typography } from "@mui/material";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormLabel from "@mui/material/FormLabel";
 
-import Calendar from "../Calendar/Calendar";
 import { useState } from "react";
+
 import dayjs from "dayjs";
+import Calendar from "../Calendar/Calendar";
 
 import {
   Wrapper,
@@ -33,11 +35,11 @@ const CardSchema = Yup.object().shape({
 
 export default function EditCard({ onSaveEdit, closeForm, ...props }) {
   const [selectedValue, setSelectedValue] = useState("without");
-  const [deadlineValue, setDeadlineValue] = useState(null);
+  const [selectDay, setSelectDay] = useState(null);
+
+  const handleSelectDay = (value) => setSelectDay(value);
 
   const handleChange = (event) => setSelectedValue(event.target.value);
-
-  const onChangeDeadline = (newValue) => setDeadlineValue(newValue);
 
   const controlProps = (item) => ({
     checked: selectedValue === item,
@@ -76,7 +78,7 @@ export default function EditCard({ onSaveEdit, closeForm, ...props }) {
         validationSchema={CardSchema}
         onSubmit={(values, actions) => {
           values.priority = selectedValue;
-          values.deadline = `${dayjs(deadlineValue).format("MM-DD-YYYY")}`;
+          values.deadline = `${dayjs(selectDay).format("MM-DD-YYYY")}`;
 
           onSaveEdit(values);
           actions.resetForm();
@@ -206,7 +208,7 @@ export default function EditCard({ onSaveEdit, closeForm, ...props }) {
             Deadline
           </Typography>
 
-          <Calendar value={deadlineValue} onChange={onChangeDeadline} />
+          <Calendar onSelectDay={handleSelectDay} />
 
           <Button type="submit">
             <Div>

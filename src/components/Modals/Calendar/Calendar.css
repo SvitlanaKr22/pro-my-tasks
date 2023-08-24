@@ -13,14 +13,6 @@
   color: var(--opacityWhite);
 }
 
-/* .DayItem.css-qa7bje-MuiButtonBase-root-MuiPickersDay-root:focus,
-.DayItem.css-qa7bje-MuiButtonBase-root-MuiPickersDay-root:hover,
-.DayItem.css-qa7bje-MuiButtonBase-root-MuiPickersDay-root.Mui-selected,
-.DayItem.css-qa7bje-MuiButtonBase-root-MuiPickersDay-root:focus.Mui-selected,
-.DayItem.css-qa7bje-MuiButtonBase-root-MuiPickersDay-root:hover.Mui-selected,
-.DayItem.css-1jsy6pn-MuiButtonBase-root-MuiPickersDay-root.Mui-selected,
-.DayItem.css-1jsy6pn-MuiButtonBase-root-MuiPickersDay-root:focus.Mui-selected,
-.DayItem.css-1jsy6pn-MuiButtonBase-root-MuiPickersDay-root:hover.Mui-selected { */
 .DayItem.MuiPickersDay-root:focus,
 .DayItem.MuiPickersDay-root:hover,
 .DayItem.MuiPickersDay-root.Mui-selected,
@@ -34,29 +26,16 @@
 .DayItem.css-qa7bje-MuiButtonBase-root-MuiPickersDay-root.Mui-disabled:not(
     .Mui-selected
   ) {
-  /* .DayItem.MuiButtonBase-root-MuiPickersDay-root.Mui-disabled:not(.Mui-selected) { */
   font-size: 14px;
   color: var(--opacityWhite);
 }
-
-/* .DayItem.css-1jsy6pn-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected) {
- 
-  font-size: 14px;
-  color: var(--calendarCurrentMonth);
-} */
 
 .DayItem.MuiPickersDay-root.Mui-disabled:not(.Mui-selected) {
   font-size: 14px;
   color: var(--opacityWhite);
 }
 
-/* .DayItem.MuiPickersDay-root:not(.Mui-selected) {
-  font-size: 14px;
-  color: var(--calendarCurrentMonth);
-} */
 .CalendarContainer.MuiDateCalendar-root {
-  /* width: 233px;
-  height: 254px; */
   width: 260px;
   height: 290px;
   background-color: var(--calendarBackground);
