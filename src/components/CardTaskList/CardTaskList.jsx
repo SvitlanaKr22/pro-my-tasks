@@ -7,8 +7,8 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { selectRadio } from "../../redux/filter/filterSelectors";
 import { CardList } from "../../components/CardTaskList/CardTaskList.styled";
+
 export default function CardTaskList({ currentColumn }) {
- 
   const dispatch = useDispatch();
 
   const filterValue = useSelector(selectRadio);
@@ -41,11 +41,25 @@ export default function CardTaskList({ currentColumn }) {
         <CardList>
           <List>
             {listCardsColumn.map(
-              ({ _id: id, title, taskValue, priority, deadline }) => {
+              ({
+                _id: id,
+                title,
+                taskValue,
+                priority,
+                deadline,
+                ownerColumn,
+              }) => {
                 return (
                   <CardTask
                     key={id}
-                    card={{ id, title, taskValue, priority, deadline }}
+                    card={{
+                      id,
+                      title,
+                      taskValue,
+                      priority,
+                      deadline,
+                      ownerColumn,
+                    }}
                   />
                 );
               }

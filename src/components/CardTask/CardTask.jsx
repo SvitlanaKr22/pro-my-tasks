@@ -49,7 +49,7 @@ const priorityColor = (priority) => {
 };
 
 export default function CardTask({ card }) {
-  const { id, title, taskValue, priority, deadline } = card;
+  const { id, title, taskValue, priority, deadline, ownerColumn } = card;
   const [showModal, setShowModal] = useState(false);
   const [showRemDedline, setShowRemDedline] = useState(false);
 
@@ -122,12 +122,14 @@ export default function CardTask({ card }) {
             fontSize: 12,
             fontWeight: "400",
             fontFamily: "Poppins",
+            height: "36px",
+            width: "290px",
           }}
           gutterBottom
         >
           <EllipsisText
             text={taskValue}
-            length={90}
+            length={50}
             tooltip={{
               copyOnClick: true,
             }}
@@ -255,7 +257,12 @@ export default function CardTask({ card }) {
                 </svg>
               </Button>
 
-              <PopoverCard anchorEl={anchorEl} onClose={handleClose} />
+              <PopoverCard
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                ownerColumn={ownerColumn}
+                idCard={id}
+              />
 
               <Button
                 size="small"

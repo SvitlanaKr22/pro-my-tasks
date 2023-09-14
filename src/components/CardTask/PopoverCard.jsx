@@ -1,11 +1,17 @@
 import Popover from "@mui/material/Popover";
-import Typography from "@mui/material/Typography";
+//import Typography from "@mui/material/Typography";
+import ColumnListOnCard from "./ColumnListOnCard";
 
-export default function PopoverCard({ anchorEl, onClose }) {
+export default function PopoverCard({
+  anchorEl,
+  onClose,
+  ownerColumn,
+  idCard,
+}) {
   const open = Boolean(anchorEl);
 
   return (
-    <div>
+    <>
       <Popover
         open={open}
         anchorEl={anchorEl}
@@ -15,8 +21,9 @@ export default function PopoverCard({ anchorEl, onClose }) {
           horizontal: "left",
         }}
       >
-        <Typography sx={{ p: 2 }}>This should be a list of columns</Typography>
+        {/* <Typography sx={{ p: 2 }}>This should be a list of columns</Typography> */}
+        <ColumnListOnCard currentCol={ownerColumn} idCard={idCard} />
       </Popover>
-    </div>
+    </>
   );
 }
